@@ -1,0 +1,88 @@
+{% extends 'gestao/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-1">Dashboard</h2>
+        <p class="text-muted mb-0">Bem-vindo ao sistema de gestão do restaurante</p>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card h-100" style="border-left: 5px solid #4361ee;">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-muted mb-1 fw-semibold">PRATOS</p>
+                        <h2 class="fw-bold mb-0">{{ total_pratos }}</h2>
+                    </div>
+                    <div style="background:#e8ecff; border-radius:12px; padding:16px;">
+                        <span style="font-size:2rem;">🍽️</span>
+                    </div>
+                </div>
+                <a href="{% url 'lista_pratos' %}" class="btn btn-sm btn-dark mt-3 w-100">
+                    <i class="bi bi-arrow-right"></i> Ver Pratos
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100" style="border-left: 5px solid #2ec4b6;">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-muted mb-1 fw-semibold">MESAS</p>
+                        <h2 class="fw-bold mb-0">{{ total_mesas }}</h2>
+                    </div>
+                    <div style="background:#e0f7f5; border-radius:12px; padding:16px;">
+                        <span style="font-size:2rem;">🪑</span>
+                    </div>
+                </div>
+                <a href="{% url 'lista_mesas' %}" class="btn btn-sm btn-dark mt-3 w-100">
+                    <i class="bi bi-arrow-right"></i> Ver Mesas
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100" style="border-left: 5px solid #f4a261;">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-muted mb-1 fw-semibold">PEDIDOS PENDENTES</p>
+                        <h2 class="fw-bold mb-0">{{ pedidos_pendentes }}</h2>
+                    </div>
+                    <div style="background:#fff3e8; border-radius:12px; padding:16px;">
+                        <span style="font-size:2rem;">📋</span>
+                    </div>
+                </div>
+                <a href="{% url 'lista_pedidos' %}" class="btn btn-sm btn-dark mt-3 w-100">
+                    <i class="bi bi-arrow-right"></i> Ver Pedidos
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body p-4 text-center">
+                <h5 class="fw-bold mb-3">Ações Rápidas</h5>
+                <a href="{% url 'criar_prato' %}" class="btn btn-dark w-100 mb-2">
+                    <i class="bi bi-plus-circle"></i> Novo Prato
+                </a>
+                <a href="{% url 'criar_mesa' %}" class="btn btn-dark w-100 mb-2">
+                    <i class="bi bi-plus-circle"></i> Nova Mesa
+                </a>
+                <a href="{% url 'criar_pedido' %}" class="btn btn-dark w-100">
+                    <i class="bi bi-plus-circle"></i> Novo Pedido
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'gestao/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-1">🍽️ Pratos</h2>
+        <p class="text-muted mb-0">Gerir o menu do restaurante</p>
+    </div>
+    <a href="{% url 'criar_prato' %}" class="btn btn-dark">
+        <i class="bi bi-plus-circle"></i> Novo Prato
+    </a>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body p-3">
+        <form method="get">
+            <div class="input-group">
+                <span class="input-group-text bg-white border-end-0">
+                    <i class="bi bi-search text-muted"></i>
+                </span>
+                <input type="text" name="q" value="{{ query }}" class="form-control border-start-0" placeholder="Pesquisar prato...">
+                <button type="submit" class="btn btn-dark">Pesquisar</button>
+                {% if query %}
+                    <a href="{% url 'lista_pratos' %}" class="btn btn-outline-secondary">Limpar</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th class="ps-4">Nome</th>
+                    <th>Categoria</th>
+                    <th>Preço</th>
+                    <th class="text-end pe-4">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prato in pratos %}
+                <tr>
+                    <td class="ps-4 fw-semibold">
+                        <a href="{% url 'detalhe_prato' prato.pk %}" class="text-decoration-none text-dark">
+                            {{ prato.nome }}
+                        </a>
+                    </td>
+                    <td><span class="badge bg-secondary">{{ prato.categoria }}</span></td>
+                    <td><span class="fw-bold text-success">{{ prato.preco }}€</span></td>
+                    <td class="text-end pe-4">
+                        <a href="{% url 'editar_prato' prato.pk %}" class="btn btn-sm btn-outline-warning me-1">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a href="{% url 'apagar_prato' prato.pk %}" class="btn btn-sm btn-outline-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center py-5 text-muted">
+                        <i class="bi bi-inbox" style="font-size:2rem;"></i>
+                        <p class="mt-2">Nenhum prato encontrado.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
