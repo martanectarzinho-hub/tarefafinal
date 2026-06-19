@@ -1,17 +1,29 @@
 # 🍕 Sistema de Gestão de Restaurante
 
-Aplicação web desenvolvida em Python com a framework Django, para gestão interna de um restaurante (pratos, mesas e pedidos).
+Aplicação web desenvolvida em Python com a framework **Django**, para gestão interna de um restaurante. Permite gerir pratos, mesas e pedidos de forma simples e intuitiva, com autenticação de utilizadores e painel de administração.
 
 ---
 
-## 📋 Funcionalidades
+## 📸 Funcionalidades
 
-- Login e Logout de utilizadores
-- Gestão de Pratos (criar, listar, editar, apagar, pesquisar)
-- Gestão de Mesas (criar, listar, editar, apagar)
-- Gestão de Pedidos (criar, listar, filtrar por estado, editar, apagar)
-- Dashboard com resumo geral
-- Painel de administração Django
+| Módulo | Operações |
+|--------|-----------|
+| 🍽️ Pratos | Criar, listar, pesquisar, editar, apagar, ver detalhe |
+| 🪑 Mesas | Criar, listar, editar, apagar |
+| 📋 Pedidos | Criar, listar, filtrar por estado, editar, apagar, ver detalhe |
+| 📊 Dashboard | Resumo geral com últimos pedidos e ações rápidas |
+| 🔐 Autenticação | Login, Logout, rotas protegidas |
+| ⚙️ Admin | Painel de administração Django (apenas para staff) |
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Python 3.10+**
+- **Django 6**
+- **SQLite** (base de dados local)
+- **Bootstrap 5** (via CDN)
+- **Bootstrap Icons** (via CDN)
 
 ---
 
@@ -19,6 +31,7 @@ Aplicação web desenvolvida em Python com a framework Django, para gestão inte
 
 - Python 3.10 ou superior
 - pip
+- Git
 
 ---
 
@@ -26,11 +39,12 @@ Aplicação web desenvolvida em Python com a framework Django, para gestão inte
 
 ### 1. Clonar o repositório
 ```bash
-git clone https://github.com/SEU_UTILIZADOR/SEU_REPOSITORIO.git
-cd SEU_REPOSITORIO
+git clone https://github.com/martanectarzinho-hub/tarefafinal.git
+cd tarefafinal
 ```
 
 ### 2. Criar e ativar o ambiente virtual
+
 ```bash
 python -m venv venv
 ```
@@ -69,23 +83,24 @@ Acede a **http://127.0.0.1:8000** no browser.
 
 ---
 
-## 🗄️ Base de Dados
+## 🗄️ Modelos de Dados
 
-A aplicação utiliza **SQLite** (ficheiro local `db.sqlite3`), não sendo necessária qualquer instalação adicional.
+- **Categoria** — categorias dos pratos (ex: Entradas, Sobremesas)
+- **Prato** — nome, descrição, preço e categoria (`ForeignKey`)
+- **Mesa** — número e capacidade
+- **Pedido** — mesa, pratos e estado (`ForeignKey` + `ManyToManyField`)
 
 ---
 
 ## 🔐 Segurança
 
 - Rotas protegidas com `@login_required`
-- Validação de dados nos formulários (ex: preços negativos não são permitidos)
+- Validação de dados no backend (ex: preços negativos não são permitidos)
 - Proteção CSRF em todos os formulários
+- Painel de administração restrito a utilizadores staff
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 👥 Autores
 
-- Python 3
-- Django 6
-- SQLite
-- Bootstrap 5 (via CDN)
+Desenvolvido no âmbito do MODULO **AID06**.
