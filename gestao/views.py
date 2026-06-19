@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 from .models import Categoria, Prato, Mesa, Pedido
 from .forms import PratoForm, MesaForm, PedidoForm
 
@@ -22,6 +23,21 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+def registar_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Conta criada com sucesso! Já pode iniciar sessão.')
+            return redirect('login')  # Redireciona para a sua view de login
+        else:
+            messages.error(request, 'Erro ao preencher o formulário. Verifique os dados.')
+    else:
+        form = UserCreationForm()
+        
+    return render(request, 'gestao/registar.html', {'form': form})
 
 
 @login_required
