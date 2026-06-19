@@ -79,14 +79,24 @@
         const helpText = container.querySelector('.help-text-delay');
 
         if (helpText) {
-            // Quando o utilizador clica ou começa a escrever na caixa
+            // ── AJUSTAR O TEXTO APENAS PARA O CAMPO DA PALAVRA-PASSE ──
+            // Se o campo for de password, alteramos o texto nativo do Django para os teus tópicos
+            if (input.type === 'password') {
+                helpText.innerHTML = `
+                    <ul class="mb-0 ps-3">
+                        <li>Pelo menos 8 caracteres.</li>
+                        <li>Não pode ser totalmente numérica.</li>
+                    </ul>
+                `;
+            }
+
+            // Ouvinte: Mostra quando o utilizador clica na caixa
             input.addEventListener('focus', () => {
                 helpText.classList.remove('d-none');
             });
 
-            // Quando o utilizador clica fora da caixa
+            // Ouvinte: Esconde quando clica fora (se estiver vazio)
             input.addEventListener('blur', () => {
-                // Só esconde se o utilizador não tiver escrito nada ainda, para manter o alerta visível caso queira consultar
                 if (input.value === '') {
                     helpText.classList.add('d-none');
                 }
