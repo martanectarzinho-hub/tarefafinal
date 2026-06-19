@@ -14,15 +14,16 @@
 <div class="row g-4">
     {% for mesa in mesas %}
     <div class="col-md-3">
-        <div class="card text-center h-100">
+        <div class="card h-100 text-center" style="border-top: 4px solid #2ec4b6; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
             <div class="card-body p-4">
-                <div style="background:#f0f0f0; border-radius:12px; padding:16px; margin-bottom:12px;">
-                    <span style="font-size:2.5rem;">🪑</span>
+                <div style="background: linear-gradient(135deg, #e0f7f5, #b2ebf2); border-radius:16px; padding:20px; margin-bottom:16px;">
+                    <i class="bi bi-grid-3x3" style="font-size:3rem; color:#2ec4b6;"></i>
                 </div>
-                <h4 class="fw-bold">Mesa {{ mesa.numero }}</h4>
-                <p class="text-muted mb-3">
-                    <i class="bi bi-people"></i> {{ mesa.capacidade }} pessoas
+                <h4 class="fw-bold mb-1">Mesa {{ mesa.numero }}</h4>
+                <p class="text-muted mb-1">
+                    <i class="bi bi-people-fill"></i> {{ mesa.capacidade }} pessoas
                 </p>
+                <span class="badge bg-success mb-3">Disponível</span>
                 <div class="d-flex gap-2 justify-content-center">
                     <a href="{% url 'editar_mesa' mesa.pk %}" class="btn btn-sm btn-outline-warning">
                         <i class="bi bi-pencil"></i> Editar
@@ -35,9 +36,16 @@
         </div>
     </div>
     {% empty %}
-    <div class="col-12 text-center py-5 text-muted">
-        <i class="bi bi-inbox" style="font-size:2rem;"></i>
-        <p class="mt-2">Nenhuma mesa encontrada.</p>
+    <div class="col-12">
+        <div class="card text-center py-5">
+            <div class="card-body text-muted">
+                <i class="bi bi-inbox" style="font-size:3rem;"></i>
+                <p class="mt-3 fs-5">Nenhuma mesa encontrada.</p>
+                <a href="{% url 'criar_mesa' %}" class="btn btn-dark mt-2">
+                    <i class="bi bi-plus-circle"></i> Criar primeira mesa
+                </a>
+            </div>
+        </div>
     </div>
     {% endfor %}
 </div>
