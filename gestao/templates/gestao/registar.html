@@ -29,7 +29,7 @@
                     {% csrf_token %}
                     
                     {% for field in form %}
-                        <div class="mb-3">
+                        <div class="mb-3 position-relative">
                             <label class="form-label fw-semibold">
                                 {% if field.name == 'username' %}
                                     <i class="bi bi-person"></i> Utilizador
@@ -51,7 +51,7 @@
                             {% endif %}
                             
                             {% if field.help_text %}
-                                <div class="form-text text-muted" style="font-size: 0.75rem;">
+                                <div class="form-text text-muted help-text-delay d-none mt-1 p-2 bg-light rounded border" style="font-size: 0.75rem; z-index: 10;">
                                     {{ field.help_text|striptags }}
                                 </div>
                             {% endif %}
@@ -72,4 +72,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.querySelectorAll('.form-control').forEach(input => {
+        const container = input.closest('.mb-3');
+        const helpText = container.querySelector('.help-text-delay');
+
+        if (helpText) {
+            // Quando o utilizador clica ou começa a escrever na caixa
+            input.addEventListener('focus', () => {
+                helpText.classList.remove('d-none');
+            });
+
+            // Quando o utilizador clica fora da caixa
+            input.addEventListener('blur', () => {
+                // Só esconde se o utilizador não tiver escrito nada ainda, para manter o alerta visível caso queira consultar
+                if (input.value === '') {
+                    helpText.classList.add('d-none');
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}
