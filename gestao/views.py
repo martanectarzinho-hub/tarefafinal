@@ -29,10 +29,12 @@ def dashboard(request):
     total_pratos = Prato.objects.count()
     total_mesas = Mesa.objects.count()
     pedidos_pendentes = Pedido.objects.filter(estado='pendente').count()
+    ultimos_pedidos = Pedido.objects.order_by('-data')[:5]
     return render(request, 'gestao/dashboard.html', {
         'total_pratos': total_pratos,
         'total_mesas': total_mesas,
         'pedidos_pendentes': pedidos_pendentes,
+        'ultimos_pedidos': ultimos_pedidos,
     })
 
 

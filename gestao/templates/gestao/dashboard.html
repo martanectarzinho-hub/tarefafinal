@@ -3,26 +3,26 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h2 class="fw-bold mb-1">Dashboard</h2>
-        <p class="text-muted mb-0">Bem-vindo ao sistema de gestão do restaurante</p>
+        <h2 class="fw-bold mb-1">👋 Olá, {{ user.username }}!</h2>
+        <p class="text-muted mb-0">Aqui está o resumo do dia</p>
     </div>
+    <span class="text-muted small"><i class="bi bi-calendar3"></i> {% now "d/m/Y" %}</span>
 </div>
 
-<div class="row g-4 mb-5">
+<!-- Cartões de estatísticas -->
+<div class="row g-4 mb-4">
     <div class="col-md-4">
         <div class="card h-100" style="border-left: 5px solid #4361ee;">
             <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <p class="text-muted mb-1 fw-semibold">PRATOS</p>
-                        <h2 class="fw-bold mb-0">{{ total_pratos }}</h2>
-                    </div>
-                    <div style="background:#e8ecff; border-radius:12px; padding:16px;">
-                        <span style="font-size:2rem;">🍽️</span>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <p class="text-muted mb-0 fw-semibold text-uppercase small">Pratos no Menu</p>
+                    <div style="background:#e8ecff; border-radius:12px; padding:10px 14px;">
+                        <i class="bi bi-egg-fried" style="font-size:1.5rem; color:#4361ee;"></i>
                     </div>
                 </div>
-                <a href="{% url 'lista_pratos' %}" class="btn btn-sm btn-dark mt-3 w-100">
-                    <i class="bi bi-arrow-right"></i> Ver Pratos
+                <h2 class="fw-bold mb-0">{{ total_pratos }}</h2>
+                <a href="{% url 'lista_pratos' %}" class="btn btn-dark w-100 mt-3">
+                    <i class="bi bi-arrow-right-circle"></i> Ver Pratos
                 </a>
             </div>
         </div>
@@ -31,17 +31,15 @@
     <div class="col-md-4">
         <div class="card h-100" style="border-left: 5px solid #2ec4b6;">
             <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <p class="text-muted mb-1 fw-semibold">MESAS</p>
-                        <h2 class="fw-bold mb-0">{{ total_mesas }}</h2>
-                    </div>
-                    <div style="background:#e0f7f5; border-radius:12px; padding:16px;">
-                        <span style="font-size:2rem;">🪑</span>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <p class="text-muted mb-0 fw-semibold text-uppercase small">Mesas Disponíveis</p>
+                    <div style="background:#e0f7f5; border-radius:12px; padding:10px 14px;">
+                        <i class="bi bi-grid" style="font-size:1.5rem; color:#2ec4b6;"></i>
                     </div>
                 </div>
-                <a href="{% url 'lista_mesas' %}" class="btn btn-sm btn-dark mt-3 w-100">
-                    <i class="bi bi-arrow-right"></i> Ver Mesas
+                <h2 class="fw-bold mb-0">{{ total_mesas }}</h2>
+                <a href="{% url 'lista_mesas' %}" class="btn btn-dark w-100 mt-3">
+                    <i class="bi bi-arrow-right-circle"></i> Ver Mesas
                 </a>
             </div>
         </div>
@@ -50,28 +48,27 @@
     <div class="col-md-4">
         <div class="card h-100" style="border-left: 5px solid #f4a261;">
             <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <p class="text-muted mb-1 fw-semibold">PEDIDOS PENDENTES</p>
-                        <h2 class="fw-bold mb-0">{{ pedidos_pendentes }}</h2>
-                    </div>
-                    <div style="background:#fff3e8; border-radius:12px; padding:16px;">
-                        <span style="font-size:2rem;">📋</span>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <p class="text-muted mb-0 fw-semibold text-uppercase small">Pedidos Pendentes</p>
+                    <div style="background:#fff3e8; border-radius:12px; padding:10px 14px;">
+                        <i class="bi bi-receipt" style="font-size:1.5rem; color:#f4a261;"></i>
                     </div>
                 </div>
-                <a href="{% url 'lista_pedidos' %}" class="btn btn-sm btn-dark mt-3 w-100">
-                    <i class="bi bi-arrow-right"></i> Ver Pedidos
+                <h2 class="fw-bold mb-0">{{ pedidos_pendentes }}</h2>
+                <a href="{% url 'lista_pedidos' %}?estado=pendente" class="btn btn-dark w-100 mt-3">
+                    <i class="bi bi-arrow-right-circle"></i> Ver Pendentes
                 </a>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Ações rápidas + info -->
 <div class="row g-4">
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-4 text-center">
-                <h5 class="fw-bold mb-3">Ações Rápidas</h5>
+        <div class="card h-100">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-lightning-charge text-warning"></i> Ações Rápidas</h5>
                 <a href="{% url 'criar_prato' %}" class="btn btn-dark w-100 mb-2">
                     <i class="bi bi-plus-circle"></i> Novo Prato
                 </a>
@@ -81,6 +78,48 @@
                 <a href="{% url 'criar_pedido' %}" class="btn btn-dark w-100">
                     <i class="bi bi-plus-circle"></i> Novo Pedido
                 </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card h-100">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-clock-history text-primary"></i> Últimos Pedidos</h5>
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Mesa</th>
+                            <th>Data</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pedido in ultimos_pedidos %}
+                        <tr>
+                            <td><a href="{% url 'detalhe_pedido' pedido.pk %}" class="text-decoration-none fw-bold">#{{ pedido.id }}</a></td>
+                            <td>{{ pedido.mesa }}</td>
+                            <td class="text-muted">{{ pedido.data|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                {% if pedido.estado == 'pendente' %}
+                                    <span class="badge bg-warning text-dark">⏳ Pendente</span>
+                                {% elif pedido.estado == 'em_preparacao' %}
+                                    <span class="badge bg-primary">👨‍🍳 Em Preparação</span>
+                                {% elif pedido.estado == 'entregue' %}
+                                    <span class="badge bg-success">✅ Entregue</span>
+                                {% else %}
+                                    <span class="badge bg-danger">❌ Cancelado</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-3">Nenhum pedido ainda.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
